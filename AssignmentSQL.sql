@@ -22,7 +22,7 @@ SELECT COUNT(FirstName), ContactID FROM contact WHERE ContactID IS NOT NULL AND 
 --Determine the current payrate of the CEO of Adventure Works.
 
 --Attempt was made using WHERE Title = 'chief%' or c%, no success.
- 
+
 --Therefore I had the title ordered by ascending order to find Chief Executive Officer
 
 SELECT Title FROM employee
@@ -34,6 +34,38 @@ SELECT hist.Rate, hist.EmployeeID FROM employeepayhistory hist
 INNER JOIN employee e
 ON e.EmployeeID = hist.EmployeeID
 WHERE e.EmployeeID = '109'; --Output ay Rate: 125.5. 
+
+--Determine how many employees are currently employed in each department.
+
+--Both employeedepartmenthistory and department share the same DepartmentID key, where department has the DepartmentID as primary key
+
+--to join department and employeedepartmenthistory with DepartmentID key. 
+
+SELECT COUNT(dept.DepartmentID), dept.Name FROM department dept INNER JOIN employeedepartmenthistory emp 
+ON emp.DepartmentID = dept.DepartmentID 
+GROUP BY dept.Name 
+
+--used GROUP BY function to group categories together
+--@link: https://www.w3schools.com/sql/sql_groupby.asp
+
+--Employee      Dept Name
+--5 	        Document Control
+--7 	        Engineering
+--2 	        Executive
+--7 	        Facilities and Maintenance
+--11 	        Finance
+--6 	        Human Resources
+--10 	        Information Services
+--10 	        Marketing
+--180 	        Production
+--6 	        Production Control
+--13 	        Purchasing
+--7 	        Quality Assurance
+--4 	        Research and Development
+--18 	        Sales
+--6 	        Shipping and Receiving
+--4 	        Tool Design
+
 
 
 
