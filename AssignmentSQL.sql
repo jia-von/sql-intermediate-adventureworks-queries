@@ -19,5 +19,22 @@ INNER JOIN employee e ON e.ContactID = c.ContactID WHERE c.ContactID = '1209' --
 
 SELECT COUNT(FirstName), ContactID FROM contact WHERE ContactID IS NOT NULL AND FirstName LIKE 'S%'; -- Output COUNT(FirstName) = 1281
 
+--Determine the current payrate of the CEO of Adventure Works.
+
+--Attempt was made using WHERE Title = 'chief%' or c%, no success.
+ 
+--Therefore I had the title ordered by ascending order to find Chief Executive Officer
+
+SELECT Title FROM employee
+ORDER BY Title ASC;
+
+--It was found that the CEO has NationalID = 295847284, Employee ID = 109, Contact ID = 1287
+
+SELECT hist.Rate, hist.EmployeeID FROM employeepayhistory hist
+INNER JOIN employee e
+ON e.EmployeeID = hist.EmployeeID
+WHERE e.EmployeeID = '109'; --Output ay Rate: 125.5. 
+
+
 
 
