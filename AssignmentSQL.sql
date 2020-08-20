@@ -2,13 +2,16 @@
 --VacationHours column is found employee table
 
 --The highest VacationHours would be:
-SELECT MAX(VacationHours) as MaxVacation FROM employee;
+SELECT MAX(VacationHours) FROM employee;
 
 --ContactID is 1209, MAX(VacationHours) = 99
 
 --Join two tables together with ContactID using unique table/alias
 SELECT c.FirstName, c.LastName, c.ContactID FROM contact c 
-INNER JOIN employee e ON e.ContactID = c.ContactID WHERE c.ContactID = '1209' --Output is Guy Gilbert. 
+INNER JOIN employee e ON e.ContactID = c.ContactID 
+WHERE c.ContactID IN
+(SELECT ContactID FROM employee HAVING MAX(VacationHours));
+--Output is Guy Gilbert. 
 
 --Query: Determine how many employees there are whose names start with the letter S.
 
@@ -25,6 +28,7 @@ SELECT COUNT(FirstName), ContactID FROM contact WHERE ContactID IS NOT NULL AND 
 SELECT Title FROM employee WHERE Title LIKE 'chief%' 
 
 --It was found that the CEO has NationalID = 295847284, Employee ID = 109, Contact ID = 1287
+--The full title name is Chief Executive Officer
 
 SELECT hist.Rate, hist.EmployeeID FROM employeepayhistory hist
 INNER JOIN employee e
