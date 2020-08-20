@@ -47,7 +47,7 @@ SELECT DepartmentID FROM `employeedepartmenthistory` WHERE  EndDate IS NULL;
 SELECT COUNT(dept.DepartmentID), dept.Name FROM department dept 
 INNER JOIN employeedepartmenthistory emp 
 ON emp.DepartmentID = dept.DepartmentID 
-WHERE dept.DepartmentID IN (SELECT DepartmentID FROM employeedepartmenthistory HAVING  EndDate IS NULL)
+WHERE dept.DepartmentID IN (SELECT DepartmentID FROM employeedepartmenthistory HAVING EndDate IS NULL)
 GROUP BY dept.Name; 
 
 
