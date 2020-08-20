@@ -19,14 +19,10 @@ INNER JOIN employee e ON e.ContactID = c.ContactID WHERE c.ContactID = '1209' --
 
 SELECT COUNT(FirstName), ContactID FROM contact WHERE ContactID IS NOT NULL AND FirstName LIKE 'S%'; -- Output COUNT(FirstName) = 1281
 
---Determine the current payrate of the CEO of Adventure Works.
+--Query: Determine the current payrate of the CEO of Adventure Works.
+--Find Title with 'chief' for CEO
 
---Attempt was made using WHERE Title = 'chief%' or c%, no success.
-
---Therefore I had the title ordered by ascending order to find Chief Executive Officer
-
-SELECT Title FROM employee
-ORDER BY Title ASC;
+SELECT Title FROM employee WHERE Title LIKE 'chief%' 
 
 --It was found that the CEO has NationalID = 295847284, Employee ID = 109, Contact ID = 1287
 
@@ -35,7 +31,7 @@ INNER JOIN employee e
 ON e.EmployeeID = hist.EmployeeID
 WHERE e.EmployeeID = '109'; --Output ay Rate: 125.5. 
 
---Determine how many employees are currently employed in each department.
+--Query: Determine how many employees are currently employed in each department.
 
 --Both employeedepartmenthistory and department share the same DepartmentID key, where department has the DepartmentID as primary key
 
