@@ -8,9 +8,9 @@ SELECT MAX(VacationHours) FROM employee;
 
 --Join two tables together with ContactID using unique table/alias
 SELECT c.FirstName, c.LastName, c.ContactID FROM contact c 
-INNER JOIN employee e ON e.ContactID = c.ContactID 
-WHERE c.ContactID IN
-(SELECT ContactID FROM employee HAVING MAX(VacationHours));
+LEFT OUTER JOIN employee e 
+ON e.ContactID = c.ContactID
+WHERE e.ContactID HAVING MAX(e.VacationHours);
 --Output is Guy Gilbert. 
 
 --Query: Determine how many employees there are whose names start with the letter S.
@@ -45,9 +45,9 @@ SELECT DepartmentID FROM `employeedepartmenthistory` WHERE  EndDate IS NULL;
 --to join department and employeedepartmenthistory with DepartmentID key. 
 
 SELECT COUNT(dept.DepartmentID), dept.Name FROM department dept 
-INNER JOIN employeedepartmenthistory emp 
+LEFT OUTER JOIN employeedepartmenthistory emp 
 ON emp.DepartmentID = dept.DepartmentID 
-WHERE dept.DepartmentID IN (SELECT DepartmentID FROM employeedepartmenthistory HAVING EndDate IS NULL)
+WHERE emp.EndDate IS NULL
 GROUP BY dept.Name; 
 
 
