@@ -4,14 +4,16 @@
 --The highest VacationHours would be:
 SELECT MAX(VacationHours) FROM employee;
 
---ContactID is 1209, MAX(VacationHours) = 99
-
+-- MAX(VacationHours) = 99
+--EmployeeID with VacationHours of 99 are 109, 179, 224
 --Join two tables together with ContactID using unique table/alias
-SELECT c.FirstName, c.LastName, c.ContactID FROM contact c 
+SELECT c.FirstName, c.LastName, c.ContactID, e.EmployeeID 
+FROM contact c 
 LEFT OUTER JOIN employee e 
-ON e.ContactID = c.ContactID
-WHERE e.ContactID HAVING MAX(e.VacationHours);
---Output is Guy Gilbert. 
+ON e.ContactID = c.ContactID 
+WHERE e.EmployeeID IN (109, 179, 224) 
+
+--Output Is Ken Sanchez, Chad Niswonger, and Betsy Stadick. 
 
 --Query: Determine how many employees there are whose names start with the letter S.
 
