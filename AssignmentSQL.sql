@@ -26,7 +26,10 @@ WHERE e.EmployeeID IN (109, 179, 224)
 --According to the table there is a total of 1281, however I will use the COUNT function to compute. 
 --The answer matches
 
-SELECT COUNT(FirstName), ContactID FROM contact WHERE ContactID IS NOT NULL AND FirstName LIKE 'S%'; -- Output COUNT(FirstName) = 1281
+SELECT COUNT(c.FirstName) from contact c
+LEFT OUTER JOIN employee e
+ON e.ContactID = c.ContactID
+WHERE e.EmployeeID IS NOT NULL AND c.FirstName LIKE 'S%'; -- Output COUNT(FirstName) = 31
 
 --Query: Determine the current payrate of the CEO of Adventure Works.
 --Find Title with 'chief' for CEO
