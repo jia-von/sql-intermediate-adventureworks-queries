@@ -22,3 +22,21 @@ SELECT COUNT(LoginID) FROM employee WHERE LoginID LIKE '%8' --Output 2
 UNION ALL
 SELECT COUNT(LoginID) FROM employee WHERE LoginID LIKE '%9'; --Output 1
 
+--Challenge: Determine the first and last names of the employees who were hired in the most recent uptake. 
+--Structure the query so that it will continue to work if new employees are hired (do not use a literal hire date value in the query).
+
+--it was determined that employee table has HireDate
+--Check data first using ORDER BY function
+
+SELECT * FROM `employee`
+ORDER BY HireDate DESC; 
+
+--Select latest hire date, and double check output with former output
+SELECT ContactID, MAX(HireDate) FROM `employee`;
+
+--Table employee was checked and it was noted ContactID is the key shared between contact and employee table.
+
+SELECT cont.FirstName, cont.LastName from contact cont
+INNER JOIN employee emp
+ON emp.ContactID = cont.ContactID;
+
