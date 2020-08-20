@@ -5,7 +5,11 @@
 SELECT MAX(VacationHours) FROM employee;
 
 -- MAX(VacationHours) = 99
+
+SELECT*FROM employee where VacationHours = '99';
+
 --EmployeeID with VacationHours of 99 are 109, 179, 224
+
 --Join two tables together with ContactID using unique table/alias
 SELECT c.FirstName, c.LastName, c.ContactID, e.EmployeeID 
 FROM contact c 
