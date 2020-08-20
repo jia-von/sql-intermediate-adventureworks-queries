@@ -43,10 +43,9 @@ ON emp.ContactID = cont.ContactID;
 
 --The complete query to search for the latest hire
 SELECT cont.FirstName, cont.LastName from contact cont
-INNER JOIN employee emp
+LEFT OUTER JOIN employee emp
 ON emp.ContactID = cont.ContactID
-WHERE cont.ContactID IN 
-(SELECT ContactID FROM employee HAVING MAX(HireDate)
-);
+WHERE emp.ContactID HAVING MAX(emp.HireDate);
+
 --Current output is Guy Gilbert
 
