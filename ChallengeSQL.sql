@@ -32,20 +32,11 @@ SELECT COUNT(LoginID) FROM employee WHERE LoginID LIKE '%9'; --Output 1
 SELECT * FROM `employee`
 ORDER BY HireDate DESC; 
 
---Select latest hire date, and double check output with former output
-SELECT ContactID, MAX(HireDate) FROM `employee`;
+SELECT c.FirstName, c.LastName, e.HireDate FROM employee e 
+LEFT OUTER JOIN contact c
+ON c.ContactID = e.ContactID
+ORDER BY e.HireDate DESC
+LIMIT 3;
 
---Table employee was checked and it was noted ContactID is the key shared between contact and employee table.
-
-SELECT cont.FirstName, cont.LastName from contact cont
-INNER JOIN employee emp
-ON emp.ContactID = cont.ContactID;
-
---The complete query to search for the latest hire
-SELECT cont.FirstName, cont.LastName from contact cont
-LEFT OUTER JOIN employee emp
-ON emp.ContactID = cont.ContactID
-WHERE emp.ContactID HAVING MAX(emp.HireDate);
-
---Current output is Guy Gilbert
+--Current output is Lynn Tsoflias and Rachel Valdez. 
 
