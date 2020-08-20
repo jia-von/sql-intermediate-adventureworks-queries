@@ -38,29 +38,35 @@ WHERE e.EmployeeID = '109'; --Output ay Rate: 125.5.
 --Query: Determine how many employees are currently employed in each department.
 
 --Both employeedepartmenthistory and department share the same DepartmentID key, where department has the DepartmentID as primary key
+--Currently Active employee
+
+SELECT DepartmentID FROM `employeedepartmenthistory` WHERE  EndDate IS NULL;
 
 --to join department and employeedepartmenthistory with DepartmentID key. 
 
-SELECT COUNT(dept.DepartmentID), dept.Name FROM department dept INNER JOIN employeedepartmenthistory emp 
+SELECT COUNT(dept.DepartmentID), dept.Name FROM department dept 
+INNER JOIN employeedepartmenthistory emp 
 ON emp.DepartmentID = dept.DepartmentID 
-GROUP BY dept.Name 
+WHERE dept.DepartmentID IN (SELECT DepartmentID FROM employeedepartmenthistory HAVING  EndDate IS NULL)
+GROUP BY dept.Name; 
+
 
 --used GROUP BY function to group categories together
 --@link: https://www.w3schools.com/sql/sql_groupby.asp
 
 --Employee      Dept Name
 --5 	        Document Control
---7 	        Engineering
+--6 	        Engineering
 --2 	        Executive
 --7 	        Facilities and Maintenance
---11 	        Finance
+--10 	        Finance
 --6 	        Human Resources
 --10 	        Information Services
---10 	        Marketing
---180 	        Production
+--9 	        Marketing
+--179	        Production
 --6 	        Production Control
---13 	        Purchasing
---7 	        Quality Assurance
+--12 	        Purchasing
+--6 	        Quality Assurance
 --4 	        Research and Development
 --18 	        Sales
 --6 	        Shipping and Receiving
